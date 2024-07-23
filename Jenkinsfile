@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    // environment {
+    //     AWS_ACCESS_KEY_ID = 'AKIATCKASKZMDKZWLH4P'
+    //     // AWS_SECRET_ACCESS_KEY = ''
+    // }
     stages {
         stage('test') {
             steps {
@@ -19,20 +23,26 @@ pipeline {
                     sh 'terraform init'
                 }
             }
-        }
-        post {
-            always {
-                cleanWs()
+        } 
+        stage ('tf-validate') {
+            steps {
+                dir ('infra') {
+                    echo "Running Terraform Validate"
+                    sh '''
+                        terraform init
+                        terraform validate
+                        
+                        '''
+                }
             }
         }
-        // stage ('tf-validate') {
-        //     steps {
-        //         dir ('infra') {
-        //             echo "Running Terraform Validate"
-        //             sh 'terraform validate'
-        //         }
-        //     }
-        // }
+    }
+    post {
+        always {
+            cleanWs()
+            }
+    }
+        
         // stage ('tf-plan') {
         //     steps {
         //         dir ('infra') {
@@ -42,4 +52,3 @@ pipeline {
         //     }
         // }
     // }
-}
