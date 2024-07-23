@@ -42,6 +42,7 @@ pipeline {
             cleanWs()
             }
     }
+}
         
         // stage ('tf-plan') {
         //     steps {
