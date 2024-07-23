@@ -14,8 +14,10 @@ pipeline {
         }
         stage('tf-init') {
             steps {
-                echo "Checking Terraform Version"
-                sh 'terraform init'
+                dir('infra') {
+                    echo "Running Terraform Init"
+                    sh 'terraform init'
+                }
             }
         }
     }
