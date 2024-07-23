@@ -6,5 +6,11 @@ pipeline {
                 echo "testing"
             }
         }
+        stage('tf-version') {
+            steps {
+                echo "Checking Terraform Version"
+                sh 'terraform -v'
+            }
+        }
     }
 }
