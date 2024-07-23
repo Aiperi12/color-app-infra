@@ -12,5 +12,11 @@ pipeline {
                 sh 'terraform -v'
             }
         }
+        stage('tf-init') {
+            steps {
+                echo "Checking Terraform Version"
+                sh 'terraform init'
+            }
+        }
     }
 }
