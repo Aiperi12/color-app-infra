@@ -52,6 +52,9 @@ pipeline {
         stage ('tf-apply') {
             steps {
                 dir ('infra') {
+                    script {
+                        input message: 'Do you want to apply the Terraform changes?', ok: 'Apply'
+                    }
                     echo "Running Terraform Apply"
                     sh '''
                         terraform init
