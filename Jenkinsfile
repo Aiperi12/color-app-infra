@@ -24,31 +24,31 @@ pipeline {
                 }
             }
         } 
-        stage ('tf-validate') {
-            steps {
-                dir ('infra') {
-                    echo "Running Terraform Validate"
-                    sh '''
-                        terraform init
-                        terraform validate
+        // stage ('tf-validate') {
+        //     steps {
+        //         dir ('infra') {
+        //             echo "Running Terraform Validate"
+        //             sh '''
+        //                 terraform init
+        //                 terraform validate
                         
-                        '''
-                }
-            }
-        }
-        stage ('tf-plan') {
-            steps {
-                dir ('infra') {
-                    echo "Running Terraform Plan"
-                    sh '''
-                        terraform init
-                        terraform validate
-                        terraform plan
+        //                 '''
+        //         }
+        //     }
+        // }
+        // stage ('tf-plan') {
+        //     steps {
+        //         dir ('infra') {
+        //             echo "Running Terraform Plan"
+        //             sh '''
+        //                 terraform init
+        //                 terraform validate
+        //                 terraform plan
                         
-                        '''
-                }
-            }
-        }
+        //                 '''
+        //         }
+        //     }
+        // }
     }
     post {
         always {
