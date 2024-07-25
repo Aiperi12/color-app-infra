@@ -28,11 +28,9 @@ pipeline {
             steps {
                 dir ('infra') {
                     echo "Running Terraform Validate"
-                    sh '''
-                        terraform init
-                        terraform validate
+                    sh 'terraform validate'
+                         
                         
-                        '''
                 }
             }
         }
@@ -40,29 +38,15 @@ pipeline {
             steps {
                 dir ('infra') {
                     echo "Running Terraform Plan"
-                    sh '''
-                        terraform init
-                        terraform validate
-                        terraform plan
-                        
-                        '''
+                    sh 'terraform plan'
                 }
             }
         }
         stage ('tf-apply') {
             steps {
                 dir ('infra') {
-                    script {
-                        input message: 'Do you want to apply the Terraform changes?', ok: 'Apply'
-                    }
-                    echo "Running Terraform Apply"
-                    sh '''
-                        terraform init
-                        terraform validate
-                        terraform plan
-                        terraform apply --auto-approve
+                    sh 'terraform apply --auto-approve'
                         
-                        '''
                 }
             }
         }
