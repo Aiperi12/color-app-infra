@@ -28,11 +28,8 @@ pipeline {
             steps {
                 dir ('infra') {
                     echo "Running Terraform Validate"
-                    sh '''
-                        terraform init
-                        terraform validate
+                    sh 'terraform validate'
                         
-                        '''
                 }
             }
         }
@@ -40,12 +37,7 @@ pipeline {
             steps {
                 dir ('infra') {
                     echo "Running Terraform Plan"
-                    sh '''
-                        terraform init
-                        terraform validate
-                        terraform plan
-                        
-                        '''
+                    sh 'terraform plan'
                 }
             }
         }
